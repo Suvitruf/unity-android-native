@@ -236,7 +236,7 @@ namespace UnityAndroidNative.Android.Content {
         /// <param name="title">Optional title that will be displayed in the chooser.</param>
         /// <returns>Return a new Intent object that you can hand to</returns>
         public static Intent CreateChooser(Intent target, string title) {
-            Intent chooser = CallStatic<Intent>("android/content/Intent", "createChooser", target, title);
+            Intent chooser = CallStatic<Intent, Intent>("createChooser", target, title);
 
             return chooser;
         }

@@ -427,6 +427,10 @@ namespace UnityAndroidNative.Private {
             return default(TReturnType);
         }
 
+        public static TReturnType CallStatic<TReturnType, TClass>(string name, params object[] args) {
+            return CallStatic<TReturnType>(GetClass(typeof(TClass)), name, args);
+        }
+
         /// <summary>
         /// Calls a class static method.
         /// 
@@ -511,6 +515,10 @@ namespace UnityAndroidNative.Private {
             finally {
                 AndroidJNIHelper.DeleteJNIArgArray(args, jArgs);
             }
+        }
+
+        public static TFieldType GetStatic<TFieldType, TClass>(string name) {
+            return GetStatic<TFieldType>(typeof (TClass).FullName, name);
         }
 
         /// <summary>
