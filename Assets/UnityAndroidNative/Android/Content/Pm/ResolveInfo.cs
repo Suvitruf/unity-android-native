@@ -14,12 +14,16 @@ namespace UnityAndroidNative.Android.Content.Pm {
             }
         }
 
+        public int Icon {
+            get { return Get<int>("icon"); }
+        }
+
         internal ResolveInfo(IntPtr obj) : base(obj) {
         }
 
         public string LoadLabel(PackageManager pm) {
             return Call<string>("loadLabel", pm);
-        }
+        }       
     }
 }
 #endif

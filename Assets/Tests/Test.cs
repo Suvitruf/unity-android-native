@@ -17,6 +17,7 @@ public class Test : MonoBehaviour {
     }
 
     public static void Share(string body, string subject, string mimeType = "text/plain", string chooserTitle = "Choose application") {
+//        Debug.LogWarning(Build.VERSION.SDK_INT + " => " + Build.VERSION.CODENAME);
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.SetType(mimeType)
             .PutExtra(Intent.EXTRA_SUBJECT, subject)
@@ -32,17 +33,16 @@ public class Test : MonoBehaviour {
         for (int i = 0; i < resInfo.Count; i++) {
             // Extract the label, append it, and repackage it in a LabeledIntent
             ResolveInfo ri = resInfo[i];
-            string packageName = ri.ActivityInfo.GetPackageName();
+            string packageName = ri.ActivityInfo.PackageName;
             if (packageName.Contains("vkontakte")  || packageName.Contains("instagram") || packageName.Contains("skype")) {
                 Intent newIntent = new Intent(Intent.ACTION_SEND);
-//                newIntent.SetComponent(new ComponentName(packageName, ri.ActivityInfo.Name));
+                newIntent.SetComponent(new ComponentName(packageName, ri.ActivityInfo.Name));
                 newIntent.SetPackage(packageName)
                     .PutExtra(Intent.EXTRA_SUBJECT, subject)
                     .PutExtra(Intent.EXTRA_TEXT, body)
                     .SetType(mimeType);
 
-                intentList.Add(newIntent);
-//                intentList.Add(new LabeledIntent(newIntent, packageName, ri.LoadLabel(pm), ri.Icon));
+                intentList.Add(new LabeledIntent(newIntent, packageName, ri.LoadLabel(pm) + " [" + i + "]", ri.Icon));
             }
         }
 

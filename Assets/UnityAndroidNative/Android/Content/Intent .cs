@@ -211,6 +211,10 @@ namespace UnityAndroidNative.Android.Content {
         public Intent(string action) : base(action) {
         }
 
+        public Intent(params object[] args) : base(args) {
+
+        }
+
         public Intent(IntPtr obj) : base(obj) {
         }
 
@@ -352,8 +356,26 @@ namespace UnityAndroidNative.Android.Content {
             return this;
         }
 
+        /// <summary>
+        /// (Usually optional) Explicitly set the component to handle the intent.
+        /// If left with the default value of null, the system will determine the
+        /// appropriate class to use based on the other fields (action, data,
+        /// type, categories) in the Intent.  If this class is defined, the
+        /// specified class will always be used regardless of the other fields.  You
+        /// should only set this value when you know you absolutely want a specific
+        /// class to be used; otherwise it is better to let the system find the
+        /// appropriate class so that you will respect the installed applications
+        /// and user preferences.
+        /// @see #setClass
+        /// @see #setClassName(Context, String)
+        /// @see #setClassName(String, String)
+        /// @see #getComponent
+        /// @see #resolveActivity
+        /// </summary>
+        /// <param name="component">The name of the application component to handle theintent, or null to let the system find one for you.</param>
+        /// <returns>Returns the same Intent object, for chaining multiple calls into a single statement.</returns>
         public Intent SetComponent([CanBeNull] ComponentName component) {
-            //            Call<JavaObject>("setComponent", component != null ? component.GetInternalObject() : null);
+            Call<Intent>("setComponent", component);
 
             return this;
         }

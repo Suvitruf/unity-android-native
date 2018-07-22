@@ -188,9 +188,10 @@ namespace UnityAndroidNative.Private {
             if (args == null)
                 args = new object[0];
             mClass = CreateGlobalRef(FindClass(GetClass(GetType())));
+            string sign = GetSignature(null, args);
             jvalue[] jniArgArray = ConstructArgArray(args);
             try {
-                IntPtr num = JNISafe.NewObject(mClass, AndroidJNIHelper.GetConstructorID(mClass, args), jniArgArray);
+                IntPtr num = JNISafe.NewObject(mClass, AndroidJNIHelper.GetConstructorID(mClass, sign), jniArgArray);
                 mObject = CreateGlobalRef(num);
                 JNISafe.DeleteLocalRef(num);
             }
@@ -199,7 +200,7 @@ namespace UnityAndroidNative.Private {
             }
         }
 
-        public static string GetSignature<TReturnType>(object[] args) {
+        private static string GetArgsSignature(object[] args) {
             StringBuilder stringBuilder = new StringBuilder();
             if (args != null) {
                 stringBuilder.Append('(');
@@ -208,6 +209,15 @@ namespace UnityAndroidNative.Private {
                 }
                 stringBuilder.Append(')');
             }
+
+            string sig = stringBuilder.ToString();
+
+            return sig;
+        }
+
+        public static string GetSignature<TReturnType>(object[] args) {
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.Append(GetArgsSignature(args));
 
             var t = typeof (TReturnType);
 
@@ -245,15 +255,13 @@ namespace UnityAndroidNative.Private {
                 args = new object[0];
 
             StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.Append('(');
-            foreach (object obj in args) {
-                stringBuilder.Append(GetItemSignature(obj));
-            }
+
+            stringBuilder.Append(GetArgsSignature(args));
 
             if (!string.IsNullOrEmpty(returnType))
-                stringBuilder.Append(")L" + returnType).Append(";");
+                stringBuilder.Append("L" + returnType).Append(";");
             else
-                stringBuilder.Append(")V");
+                stringBuilder.Append("V");
 
             var sign = stringBuilder.ToString();
 

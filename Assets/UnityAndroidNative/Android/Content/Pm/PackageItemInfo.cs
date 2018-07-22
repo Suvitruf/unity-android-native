@@ -5,12 +5,16 @@ using Object = UnityAndroidNative.Java.Lang.Object;
 namespace UnityAndroidNative.Android.Content.Pm {
     public class PackageItemInfo : Object {
 
-        public string GetPackageName() {
-            return Get<string>("packageName");
+        public string PackageName {
+            get {
+                return Get<string>("packageName");
+            }
         }
 
-        public string GetName() {
-            return Get<string>("name");
+        public string Name {
+            get {
+                return Get<string>("name");
+            }
         }
 
         internal PackageItemInfo(IntPtr obj) : base(obj) {
