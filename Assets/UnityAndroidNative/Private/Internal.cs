@@ -8,7 +8,13 @@ using UnityEngine;
 
 namespace UnityAndroidNative.Private {
     public class Internal {
+        internal static bool mDebug = false;
+
+
         private static Activity mCurrentActivity;
+
+        internal static readonly Dictionary<Type, string> mClassNames = new Dictionary<Type, string>();
+        internal static IntPtr mJavaLangClass;
 
         private static void Init() {
             try {

@@ -10,23 +10,19 @@ using Object = UnityAndroidNative.Java.Lang.Object;
 
 namespace UnityAndroidNative.Private {
     public abstract class JavaObject : IDisposable {
-        internal static bool mDebug = false;
 
         internal IntPtr mObject;
         internal IntPtr mClass;
 //        internal string mJavaClassName = null;
 
         private bool mDisposed = false;
-        private static IntPtr mJavaLangClass;
 
         protected static void DebugPrint(string msg) {
-            if (!mDebug)
+            if (!Internal.mDebug)
                 return;
 
             Debug.LogFormat(msg);
         }
-
-        private static readonly Dictionary<Type, string> mClassNames = new Dictionary<Type, string>();
 
         //        protected virtual string GetClass() {
         //            if (mJavaClassName == null) {
@@ -55,7 +51,7 @@ namespace UnityAndroidNative.Private {
         protected static string GetClass(Type type) {
             string clsName;
 
-            if (mClassNames.TryGetValue(type, out clsName))
+            if (Internal.mClassNames.TryGetValue(type, out clsName))
                 return clsName;
 
             // replace + for nested class
@@ -65,7 +61,7 @@ namespace UnityAndroidNative.Private {
             var last = temp.LastIndexOf('.');
 
             clsName = temp.Substring(start, last - start).ToLower() + "." + temp.Substring(last + 1);
-            mClassNames[type] = clsName;
+            Internal.mClassNames[type] = clsName;
 
             return clsName;
         }
@@ -225,7 +221,7 @@ namespace UnityAndroidNative.Private {
 
             string sig = stringBuilder.ToString();
 
-            if (mDebug)
+            if (Internal.mDebug)
                 DebugPrint("GetSignature<" + t.FullName + ">" + ": " + sig);
 
             return sig;
@@ -261,7 +257,7 @@ namespace UnityAndroidNative.Private {
 
             var sign = stringBuilder.ToString();
 
-            if (mDebug)
+            if (Internal.mDebug)
                 DebugPrint("GetSignature: " + sign);
 
             return sign;
@@ -281,10 +277,10 @@ namespace UnityAndroidNative.Private {
 
         protected static IntPtr JavaLangClass {
             get {
-                if (mJavaLangClass == IntPtr.Zero)
-                    mJavaLangClass = AndroidJNI.FindClass("java/lang/Class");
+                if (Internal.mJavaLangClass == IntPtr.Zero)
+                    Internal.mJavaLangClass = AndroidJNI.FindClass("java/lang/Class");
 
-                return mJavaLangClass;
+                return Internal.mJavaLangClass;
             }
         }
 
@@ -520,6 +516,10 @@ namespace UnityAndroidNative.Private {
 
         public static TFieldType GetStatic<TFieldType, TClass>(string name) {
             return GetStatic<TFieldType>(typeof (TClass).FullName, name);
+        }
+
+        public static TFieldType GetStatic<TFieldType>(Type t, string name) {
+            return GetStatic<TFieldType>(GetClass(t), name);
         }
 
         /// <summary>

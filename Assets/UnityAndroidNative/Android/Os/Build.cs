@@ -19,14 +19,14 @@ namespace UnityAndroidNative.Android.Os {
             /// The user-visible SDK version of the framework; its possible values are defined in <see cref="Build.VERSION_CODES"/>.
             /// </summary>
             public static int SDK_INT {
-                get { return GetStatic<int>("android.os.Build$VERSION", "SDK_INT"); }
+                get { return GetStatic<int>(typeof (VERSION), "SDK_INT"); }
             }
 
             /// <summary>
             /// The current development codename, or the string "REL" if this is a release build.
             /// </summary>
             public static string CODENAME {
-                get { return GetStatic<string>("android.os.Build$VERSION", "SDK_INT"); }
+                get { return GetStatic<string>(typeof (VERSION), "CODENAME"); }
             }
         }
     }
