@@ -9,9 +9,6 @@ namespace UnityAndroidNative.Android.Os {
     public class BaseBundle : Object {
         public BaseBundle(IntPtr obj) : base(obj) {
         }
-
-        public BaseBundle(string clsName, params object[] args) : base(clsName, args) {
-        }
     }
 }
 #endif

@@ -187,13 +187,10 @@ namespace UnityAndroidNative.Private {
             JNISafe.DeleteLocalRef(objectClass);
         }
 
-        internal JavaObject(string className, params object[] args) {
-            if(mDebug)
-                DebugPrint("Creating JavaObject from " + className);
-
+        internal JavaObject(params object[] args) {
             if (args == null)
                 args = new object[0];
-            mClass = CreateGlobalRef(FindClass(className));
+            mClass = CreateGlobalRef(FindClass(GetClass(GetType())));
             jvalue[] jniArgArray = ConstructArgArray(args);
             try {
                 IntPtr num = JNISafe.NewObject(mClass, AndroidJNIHelper.GetConstructorID(mClass, args), jniArgArray);

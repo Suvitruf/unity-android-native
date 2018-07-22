@@ -14,9 +14,6 @@ namespace UnityAndroidNative.Android.Net {
         public Uri(IntPtr obj) : base(obj) {
         }
 
-        public Uri(string clsName, params object[] args) : base(clsName, args) {
-        }
-
         public JavaObject GetInternalObject() {
             return this;
         }

@@ -13,7 +13,6 @@ using Uri = UnityAndroidNative.Android.Net.Uri;
 
 namespace UnityAndroidNative.Android.Content {
     public class Intent : Object, Parcelable {
-        private const string IntentClassFullName = "android/content/Intent";
 
         /// <summary>
         /// Activity Action: Display an activity chooser, allowing the user to pick
@@ -209,7 +208,7 @@ namespace UnityAndroidNative.Android.Content {
         /// com.google.app.myapp.CUSTOM_ACTION.
         /// </summary>
         /// <param name="action">The Intent action, such as <see cref="ACTION_VIEW"/>.</param>
-        public Intent(string action) : base(IntentClassFullName, action) {
+        public Intent(string action) : base(action) {
         }
 
         public Intent(IntPtr obj) : base(obj) {

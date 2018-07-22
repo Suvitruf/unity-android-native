@@ -31,9 +31,6 @@ namespace Assets.UnityAndroidNative.Android.Content.Pm {
         public PackageInfo(IntPtr obj) : base(obj) {
         }
 
-        public PackageInfo(string clsName, params object[] args) : base(clsName, args) {
-        }
-
         public JavaObject GetInternalObject() {
             return this;
         }

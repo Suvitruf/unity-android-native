@@ -9,7 +9,7 @@ namespace UnityAndroidNative.Java.Lang {
         public Object(IntPtr obj) : base(obj) {
         }
 
-        public Object(string clsName, params object[] args) : base(clsName, args) {
+        public Object(params object[] args) : base(args) {
 
         }
 
