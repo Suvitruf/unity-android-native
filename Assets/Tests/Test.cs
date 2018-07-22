@@ -33,6 +33,7 @@ public class Test : MonoBehaviour {
         for (int i = 0; i < resInfo.Count; i++) {
             // Extract the label, append it, and repackage it in a LabeledIntent
             ResolveInfo ri = resInfo[i];
+
             string packageName = ri.ActivityInfo.PackageName;
             if (packageName.Contains("vkontakte")  || packageName.Contains("instagram") || packageName.Contains("skype")) {
                 Intent newIntent = new Intent(Intent.ACTION_SEND);

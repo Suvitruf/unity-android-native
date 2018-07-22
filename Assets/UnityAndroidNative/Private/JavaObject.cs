@@ -635,6 +635,57 @@ namespace UnityAndroidNative.Private {
 
             return default(TFieldType);
         }
+
+        public void Set<TFieldType>(string fieldName, TFieldType val) {
+            var t = typeof(TFieldType);
+
+            IntPtr fieldId = AndroidJNIHelper.GetFieldID(mClass, fieldName, GetSignature<TFieldType>(), false);
+            if (AndroidReflection.IsPrimitive(t)) {
+                if (t == typeof (int)) {
+                    JNISafe.SetIntField(mObject, fieldId, (int) (object) val);
+                    return;
+                }
+                if (t == typeof (bool)) {
+                    JNISafe.SetBooleanField(mObject, fieldId, (bool) (object) val);
+                    return;
+                }
+                if (t == typeof (byte)) {
+                    JNISafe.SetByteField(mObject, fieldId, (byte) (object) val);
+                    return;
+                }
+                if (t == typeof (short)) {
+                    JNISafe.SetShortField(mObject, fieldId, (short) (object) val);
+                    return;
+                }
+                if (t == typeof (long)) {
+                    JNISafe.SetLongField(mObject, fieldId, (long) (object) val);
+                    return;
+                }
+                if (t == typeof (float)) {
+                    JNISafe.SetFloatField(mObject, fieldId, (float) (object) val);
+                    return;
+                }
+                if (t == typeof (double)) {
+                    JNISafe.SetDoubleField(mObject, fieldId, (double) (object) val);
+                    return;
+                }
+
+                if (t != typeof (char))
+                    return;
+
+                JNISafe.SetCharField(mObject, fieldId, (char) (object) val);
+                return;
+            }
+
+            if (t == typeof (string)) {
+                JNISafe.SetStringField(mObject, fieldId, (string) (object) val);
+                return;
+            }
+
+            if (t.IsSubclassOf(typeof(JavaObject))) {
+                JNISafe.SetObjectField(mObject, fieldId, ((JavaObject)(object)val).mObject);
+            }
+        }
     }
 }
 #endif

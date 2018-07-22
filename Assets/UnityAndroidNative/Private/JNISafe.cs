@@ -259,90 +259,90 @@ namespace UnityAndroidNative.Private {
             }
         }
 
-        public static IntPtr GetObjectField(IntPtr obj, IntPtr fieldID) {
+        public static IntPtr GetObjectField(IntPtr obj, IntPtr fieldId) {
             try {
-                return AndroidJNI.GetObjectField(obj, fieldID);
+                return AndroidJNI.GetObjectField(obj, fieldId);
             }
             finally {
                 CheckException();
             }
         }
 
-        public static string GetStringField(IntPtr obj, IntPtr fieldID) {
+        public static string GetStringField(IntPtr obj, IntPtr fieldId) {
             try {
-                return AndroidJNI.GetStringField(obj, fieldID);
+                return AndroidJNI.GetStringField(obj, fieldId);
             }
             finally {
                 CheckException();
             }
         }
 
-        public static char GetCharField(IntPtr obj, IntPtr fieldID) {
+        public static char GetCharField(IntPtr obj, IntPtr fieldId) {
             try {
-                return AndroidJNI.GetCharField(obj, fieldID);
+                return AndroidJNI.GetCharField(obj, fieldId);
             }
             finally {
                 CheckException();
             }
         }
 
-        public static double GetDoubleField(IntPtr obj, IntPtr fieldID) {
+        public static double GetDoubleField(IntPtr obj, IntPtr fieldId) {
             try {
-                return AndroidJNI.GetDoubleField(obj, fieldID);
+                return AndroidJNI.GetDoubleField(obj, fieldId);
             }
             finally {
                 CheckException();
             }
         }
 
-        public static float GetFloatField(IntPtr obj, IntPtr fieldID) {
+        public static float GetFloatField(IntPtr obj, IntPtr fieldId) {
             try {
-                return AndroidJNI.GetFloatField(obj, fieldID);
+                return AndroidJNI.GetFloatField(obj, fieldId);
             }
             finally {
                 CheckException();
             }
         }
 
-        public static long GetLongField(IntPtr obj, IntPtr fieldID) {
+        public static long GetLongField(IntPtr obj, IntPtr fieldId) {
             try {
-                return AndroidJNI.GetLongField(obj, fieldID);
+                return AndroidJNI.GetLongField(obj, fieldId);
             }
             finally {
                 CheckException();
             }
         }
 
-        public static short GetShortField(IntPtr obj, IntPtr fieldID) {
+        public static short GetShortField(IntPtr obj, IntPtr fieldId) {
             try {
-                return AndroidJNI.GetShortField(obj, fieldID);
+                return AndroidJNI.GetShortField(obj, fieldId);
             }
             finally {
                 CheckException();
             }
         }
 
-        public static byte GetByteField(IntPtr obj, IntPtr fieldID) {
+        public static byte GetByteField(IntPtr obj, IntPtr fieldId) {
             try {
-                return AndroidJNI.GetByteField(obj, fieldID);
+                return AndroidJNI.GetByteField(obj, fieldId);
             }
             finally {
                 CheckException();
             }
         }
 
-        public static bool GetBooleanField(IntPtr obj, IntPtr fieldID) {
+        public static bool GetBooleanField(IntPtr obj, IntPtr fieldId) {
             try {
-                return AndroidJNI.GetBooleanField(obj, fieldID);
+                return AndroidJNI.GetBooleanField(obj, fieldId);
             }
             finally {
                 CheckException();
             }
         }
 
-        public static int GetIntField(IntPtr obj, IntPtr fieldID) {
+        public static int GetIntField(IntPtr obj, IntPtr fieldId) {
             try {
-                return AndroidJNI.GetIntField(obj, fieldID);
+                return AndroidJNI.GetIntField(obj, fieldId);
             }
             finally {
                 CheckException();
@@ -357,6 +357,97 @@ namespace UnityAndroidNative.Private {
                 CheckException();
             }
         }
+
+        public static void SetObjectField(IntPtr obj, IntPtr fieldId, IntPtr val) {
+            try {
+                AndroidJNI.SetObjectField(obj, fieldId, val);
+            }
+            finally {
+                CheckException();
+            }
+        }
+
+        public static void SetStringField(IntPtr obj, IntPtr fieldId, string val) {
+            try {
+                AndroidJNI.SetStringField(obj, fieldId, val);
+            }
+            finally {
+                CheckException();
+            }
+        }
+
+        public static void SetCharField(IntPtr obj, IntPtr fieldId, char val) {
+            try {
+                AndroidJNI.SetCharField(obj, fieldId, val);
+            }
+            finally {
+                CheckException();
+            }
+        }
+
+        public static void SetDoubleField(IntPtr obj, IntPtr fieldId, double val) {
+            try {
+                AndroidJNI.SetDoubleField(obj, fieldId, val);
+            }
+            finally {
+                CheckException();
+            }
+        }
+
+        public static void SetFloatField(IntPtr obj, IntPtr fieldId, float val) {
+            try {
+                AndroidJNI.SetFloatField(obj, fieldId, val);
+            }
+            finally {
+                CheckException();
+            }
+        }
+
+        public static void SetLongField(IntPtr obj, IntPtr fieldId, long val) {
+            try {
+                AndroidJNI.SetLongField(obj, fieldId, val);
+            }
+            finally {
+                CheckException();
+            }
+        }
+
+        public static void SetShortField(IntPtr obj, IntPtr fieldId, short val) {
+            try {
+                AndroidJNI.SetShortField(obj, fieldId, val);
+            }
+            finally {
+                CheckException();
+            }
+        }
+
+        public static void SetByteField(IntPtr obj, IntPtr fieldId, byte val) {
+            try {
+                AndroidJNI.SetByteField(obj, fieldId, val);
+            }
+            finally {
+                CheckException();
+            }
+        }
+
+        public static void SetBooleanField(IntPtr obj, IntPtr fieldId, bool val) {
+            try {
+                AndroidJNI.SetBooleanField(obj, fieldId, val);
+            }
+            finally {
+                CheckException();
+            }
+        }
+
+        public static void SetIntField(IntPtr obj, IntPtr fieldId, int val) {
+            try {
+                AndroidJNI.SetIntField(obj, fieldId, val);
+            }
+            finally {
+                CheckException();
+            }
+        }
     }
 }
+
 #endif
