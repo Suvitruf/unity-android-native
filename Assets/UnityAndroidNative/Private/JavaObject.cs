@@ -58,7 +58,8 @@ namespace UnityAndroidNative.Private {
             if (mClassNames.TryGetValue(type, out clsName))
                 return clsName;
 
-            var temp = type.FullName;
+            // replace + for nested class
+            var temp = type.FullName.Replace('+', '$');
             System.Diagnostics.Debug.Assert(temp != null, "class name != null");
             var start = temp.IndexOf(Utils.GetProjectPrefix(), StringComparison.Ordinal) + Utils.GetProjectPrefix().Length + 1;
             var last = temp.LastIndexOf('.');

@@ -256,11 +256,36 @@ namespace UnityAndroidNative.Android.Content {
         /// <param name="name">The name of the extra data, with package prefix.</param>
         /// <param name="value">The String data value.</param>
         /// <returns>Returns the same Intent object, for chaining multiple calls into a single statement.</returns>
-        /// <seealso cref="putExtras"/>
+        /// <seealso cref="PutExtras"/>
         /// <seealso cref="RemoveExtra"/> 
-        /// <seealso cref="getStringExtra(string)"/>
+        /// <seealso cref="GetStringExtra(string)"/>
         public Intent PutExtra(string name, string value) {
             Call<Intent>("putExtra", name, value);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Retrieve extended data from the intent.
+        /// </summary>
+        /// <param name="name">The name of the desired item.</param>
+        /// <returns>Return the value of an item that previously added with <see cref="PutExtra(string,string)"/> or null if no String value was found.</returns>
+        /// <seealso cref="PutExtra(string, string)"/>
+        public string GetStringExtra(string name) {
+            return Call<string>("getStringExtra", name);
+        }
+
+        /// <summary>
+        /// Add a set of extended data to the intent.  The keys must include a package
+        /// prefix, for example the app com.android.contacts would use names
+        /// like "com.android.contacts.ShowAll".
+        /// <seealso cref="PutExtra(string,string)"/>
+        /// <seealso cref="RemoveExtra"/>
+        /// </summary>
+        /// <param name="extras">The Bundle of extras to add to this intent.</param>
+        /// <returns></returns>
+        public Intent PutExtras(Bundle extras) {
+            Call<Intent>("putExtra", extras);
 
             return this;
         }
@@ -313,7 +338,7 @@ namespace UnityAndroidNative.Android.Content {
         /// <param name="name">The name of the extra data, with package prefix.</param>
         /// <param name="value">The Parcelable[] data value.</param>
         /// <returns>Returns the same Intent object, for chaining multiple calls</returns>
-        /// <seealso cref="putExtras"/>
+        /// <seealso cref="PutExtras"/>
         /// <seealso cref="RemoveExtra"/>
         /// <seealso cref="getParcelableArrayExtra(string) "/>
         public Intent PutExtra(string name, Parcelable[] value) {
