@@ -221,7 +221,7 @@ namespace UnityAndroidNative.Android.Content {
         [NotNull]
         public Intent SetAction([CanBeNull] string action) {
             action = string.IsNullOrEmpty(action) ? null : action;
-            Call<Intent>("setAction", action);
+            ObjectCallRaw("setAction", action);
 
             return this;
         }
@@ -247,7 +247,7 @@ namespace UnityAndroidNative.Android.Content {
 
         [NotNull]
         public Intent SetType([CanBeNull] string type) {
-            Call<Intent>("setType", type);
+            ObjectCallRaw("setType", type);
 
             return this;
         }
@@ -264,7 +264,7 @@ namespace UnityAndroidNative.Android.Content {
         /// <seealso cref="RemoveExtra"/> 
         /// <seealso cref="GetStringExtra(string)"/>
         public Intent PutExtra(string name, string value) {
-            Call<Intent>("putExtra", name, value);
+            ObjectCallRaw("putExtra", name, value);
 
             return this;
         }
@@ -289,7 +289,7 @@ namespace UnityAndroidNative.Android.Content {
         /// <param name="extras">The Bundle of extras to add to this intent.</param>
         /// <returns></returns>
         public Intent PutExtras(Bundle extras) {
-            Call<Intent>("putExtra", extras);
+            ObjectCallRaw("putExtra", extras);
 
             return this;
         }
@@ -319,7 +319,7 @@ namespace UnityAndroidNative.Android.Content {
         /// <seealso cref="GetPackage"/>
         /// <seealso cref="ResolveActivity"/>
         public Intent SetPackage([CanBeNull] string packageName) {
-            Call<Intent>("setPackage", packageName);
+            ObjectCallRaw("setPackage", packageName);
 
             return this;
         }
@@ -375,7 +375,7 @@ namespace UnityAndroidNative.Android.Content {
         /// <param name="component">The name of the application component to handle theintent, or null to let the system find one for you.</param>
         /// <returns>Returns the same Intent object, for chaining multiple calls into a single statement.</returns>
         public Intent SetComponent([CanBeNull] ComponentName component) {
-            Call<Intent>("setComponent", component);
+            ObjectCallRaw("setComponent", component);
 
             return this;
         }

@@ -36,6 +36,10 @@ namespace UnityAndroidNative.Private {
         //            return mJavaClassName;
         //        }
 
+        protected string GetClass() {
+            return GetClass(GetType());
+        }
+
         /// <summary>
         /// <para>
         /// Get java native class name for C# class that represent Java native class
@@ -356,6 +360,17 @@ namespace UnityAndroidNative.Private {
             finally {
                 AndroidJNIHelper.DeleteJNIArgArray(args, jArgs);
             }
+        }
+
+        /// <summary>
+        /// Calls a object method which return object. 
+        /// Use this method if you don't care about returned object (it doesn't create wrapepr around returned reference).
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="args"></param>
+        /// <returns></returns>
+        public IntPtr ObjectCallRaw(string name, params object[] args) {
+            return ObjectCall(name, GetClass().Replace('.', '/'), args);
         }
 
         /// <summary>
