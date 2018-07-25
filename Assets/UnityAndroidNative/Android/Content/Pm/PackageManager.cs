@@ -8,8 +8,6 @@ using PackageInfo = Assets.UnityAndroidNative.Android.Content.Pm.PackageInfo;
 namespace UnityAndroidNative.Android.Content.Pm {
     public class PackageManager : Object {
 
-        private PackageInfo mPackageInfo;
-
         public PackageManager(IntPtr obj) : base(obj) {
         }
 
@@ -33,10 +31,11 @@ namespace UnityAndroidNative.Android.Content.Pm {
         }
 
         public PackageInfo GetPackageInfo(string packageName, int flags) {
-            if(mPackageInfo == null)
-                mPackageInfo = Call<PackageInfo>("getPackageInfo", packageName, flags);
+            return Call<PackageInfo>("getPackageInfo", packageName, flags);
+        }
 
-            return mPackageInfo;
+        public string GetApplicationLabel(ApplicationInfo info) {
+            return Call<string>("getApplicationLabel", info);
         }
     }
 }

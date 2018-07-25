@@ -9,7 +9,7 @@ namespace UnityAndroidNative.Android.Content.Pm {
         /// The activity or broadcast receiver that corresponds to this resolution
         /// match, if this resolution is for an activity or broadcast receiver.
         /// Exactly one of <see cref="ActivityInfo"/>, <see cref="ServiceInfo"/>, or
-        /// {@link #providerInfo} will be non-null.
+        /// <see cref="ProviderInfo"/> will be non-null.
         /// </summary>
         public ActivityInfo ActivityInfo {
             get { return Get<ActivityInfo>("activityInfo"); }
@@ -18,10 +18,19 @@ namespace UnityAndroidNative.Android.Content.Pm {
         /// <summary>
         /// The service that corresponds to this resolution match, if this resolution
         /// is for a service. Exactly one of <see cref="ActivityInfo"/>,
-        /// <see cref="ServiceInfo"/>, or {@link #providerInfo} will be non-null.
+        /// <see cref="ServiceInfo"/>, or <see cref="ProviderInfo"/> will be non-null.
         /// </summary>
         public ServiceInfo ServiceInfo {
             get { return Get<ServiceInfo>("serviceInfo"); }
+        }
+
+        /// <summary>
+        /// The provider that corresponds to this resolution match, if this
+        /// resolution is for a provider. Exactly one of <see cref="ActivityInfo"/>,
+        /// <see cref="ServiceInfo"/>, or <see cref="ProviderInfo"/> will be non-null.
+        /// </summary>
+        public ProviderInfo ProviderInfo {
+            get { return Get<ProviderInfo>("providerInfo"); }
         }
 
         public int Icon {
@@ -33,6 +42,7 @@ namespace UnityAndroidNative.Android.Content.Pm {
 
         public ResolveInfo(ResolveInfo orig) : base(orig) {
         }
+
         /// <summary>
         /// Retrieve the current textual label associated with this resolution.  
         /// This will call back on the given PackageManager to load the label from the application.
