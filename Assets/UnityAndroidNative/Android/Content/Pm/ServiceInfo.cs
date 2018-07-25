@@ -6,7 +6,7 @@ using System.Text;
 using Object = UnityAndroidNative.Java.Lang.Object;
 
 namespace UnityAndroidNative.Android.Content.Pm {
-    public class ServiceInfo : Object {
+    public class ServiceInfo : ComponentInfo {
 
         /// <summary>
         /// Optional name of a permission required to be able to access this Service.  From the "permission" attribute.

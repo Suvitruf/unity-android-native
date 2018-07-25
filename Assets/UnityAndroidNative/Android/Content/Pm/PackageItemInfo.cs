@@ -40,7 +40,13 @@ namespace UnityAndroidNative.Android.Content.Pm {
             set { Set("logo", value); }
         }
 
+        public PackageItemInfo(PackageItemInfo orig) : base(orig) {
+        }
+
         internal PackageItemInfo(IntPtr obj) : base(obj) {
+        }
+
+        public PackageItemInfo() : base() {
         }
     }
 }
