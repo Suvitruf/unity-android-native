@@ -17,7 +17,8 @@ public class Test : MonoBehaviour {
     }
 
     public static void Share(string body, string subject, string mimeType = "text/plain", string chooserTitle = "Choose application") {
-//        Debug.LogWarning(Build.VERSION.SDK_INT + " => " + Build.VERSION.CODENAME);
+#if UNITY_ANDROID
+        //        Debug.LogWarning(Build.VERSION.SDK_INT + " => " + Build.VERSION.CODENAME);
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.SetType(mimeType)
             .PutExtra(Intent.EXTRA_SUBJECT, subject)
@@ -58,5 +59,6 @@ public class Test : MonoBehaviour {
         var chooser = Intent.CreateChooser(intentt, chooserTitle);
         chooser.PutExtra(Intent.EXTRA_INITIAL_INTENTS, extraIntents);
         activity.StartActivity(chooser);
+#endif
     }
 }
