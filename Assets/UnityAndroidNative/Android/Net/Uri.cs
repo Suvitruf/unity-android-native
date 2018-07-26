@@ -24,7 +24,7 @@ namespace UnityAndroidNative.Android.Net {
         /// <param name="uriString">String an RFC 2396-compliant, encoded URI</param>
         /// <returns><see cref="Uri"/> for this given uri string</returns>
         public static Uri Parse(string uriString) {
-            return CallStatic<Uri>("parse", uriString);
+            return CallStatic<Uri, Uri>("parse", uriString);
         }
     }
 }
