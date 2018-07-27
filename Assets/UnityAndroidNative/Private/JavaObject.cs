@@ -70,6 +70,31 @@ namespace UnityAndroidNative.Private {
             return clsName;
         }
 
+        protected static Type GetCsharpClass(string jClass) {
+            Type type;
+
+            if (Internal.mCsharpTypes.TryGetValue(jClass, out type))
+                return type;
+
+            StringBuilder csharpClass = new StringBuilder(Utils.GetProjectPrefix());
+            // replace $ for nested class
+            var temp = jClass.Replace('$', '+');
+
+            var ns = temp.Split('.');
+            for (int i = 0; i < ns.Length; i++) {
+                csharpClass.Append('.').Append(ns[i][0].ToString().ToUpper()).Append(ns[i].Substring(1));
+            }
+        
+            type =  Type.GetType(csharpClass.ToString());
+            if (type == null) {
+                DebugPrint("no type");
+
+                return null;
+            }
+
+            return type;
+        }
+
         /// <summary>
         /// <para>
         /// Retrieves the raw pointer to the Java object.
@@ -235,8 +260,7 @@ namespace UnityAndroidNative.Private {
 
             string sig = stringBuilder.ToString();
 
-            if (Internal.mDebug)
-                DebugPrint("GetSignature<" + t.FullName + ">" + ": " + sig);
+            DebugPrint("GetSignature<" + t.FullName + ">" + ": " + sig);
 
             return sig;
         }
@@ -269,8 +293,7 @@ namespace UnityAndroidNative.Private {
 
             var sign = stringBuilder.ToString();
 
-            if (Internal.mDebug)
-                DebugPrint("GetSignature: " + sign);
+            DebugPrint("GetSignature: " + sign);
 
             return sign;
         }
@@ -373,6 +396,28 @@ namespace UnityAndroidNative.Private {
             return ObjectCall(name, GetClass().Replace('.', '/'), args);
         }
 
+        public Object ObjectCallAutoResolve(string name, params object[] args) {
+            IntPtr value = ObjectCall(name, GetClass().Replace('.', '/'), args);
+            if (value == IntPtr.Zero)
+                return null;
+
+            var clsname = new Object(value).GetClass().GetName();
+            var t = GetCsharpClass(clsname);
+            if (t == null)
+                return null;
+
+            ConstructorInfo c = t.GetConstructor(new[] { value.GetType() });
+
+            if (c != null) {
+                return (Object) c.Invoke(new object[] { value });
+            }
+            else { 
+                DebugPrint("Can't instantiate class, probably no constructor with IntPtr arg");
+            }
+
+            return null;
+        }
+
         /// <summary>
         /// Calls a class method.
         /// 
@@ -436,7 +481,10 @@ namespace UnityAndroidNative.Private {
                     ConstructorInfo c = t.GetConstructor(new[] { val.GetType() });
 
                     if (c != null) {
-                        return (TReturnType)c.Invoke(new object[] { val });
+                        return (TReturnType) c.Invoke(new object[] {val});
+                    }
+                    else {
+                        DebugPrint("Can't instantiate class, probably no constructor with IntPtr arg");
                     }
                 }
             }
@@ -512,6 +560,9 @@ namespace UnityAndroidNative.Private {
 
                     if (c != null) {
                         return (TReturnType) c.Invoke(new object[] {val});
+                    }
+                    else {
+                        DebugPrint("Can't instantiate class, probably no constructor with IntPtr arg");
                     }
                 }
             }
@@ -592,6 +643,8 @@ namespace UnityAndroidNative.Private {
                 if (c != null) {
                     return (TFieldType) c.Invoke(new object[] {val});
                 }
+
+                DebugPrint("Can't instantiate class, probably no constructor with IntPtr arg");
             }
 
             return default(TFieldType);
@@ -646,6 +699,8 @@ namespace UnityAndroidNative.Private {
                 if (c != null) {
                     return (TFieldType) c.Invoke(new object[] {val});
                 }
+
+                DebugPrint("Can't instantiate class, probably no constructor with IntPtr arg");
             }
 
             return default(TFieldType);

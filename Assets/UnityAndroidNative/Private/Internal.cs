@@ -14,6 +14,7 @@ namespace UnityAndroidNative.Private {
         private static Activity mCurrentActivity;
 
         internal static readonly Dictionary<Type, string> mClassNames = new Dictionary<Type, string>();
+        internal static readonly Dictionary<string, Type> mCsharpTypes = new Dictionary<string, Type>();
         internal static IntPtr mJavaLangClass;
 
         private static void Init() {
