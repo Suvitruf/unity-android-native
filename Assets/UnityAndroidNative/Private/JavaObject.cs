@@ -92,6 +92,8 @@ namespace UnityAndroidNative.Private {
                 return null;
             }
 
+            Internal.mCsharpTypes[jClass] = type;
+
             return type;
         }
 
