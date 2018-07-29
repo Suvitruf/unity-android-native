@@ -133,7 +133,7 @@ namespace UnityAndroidNative.Private {
                     a[i] = javaObject.RawObject;
                 }
                 else {
-                    a[i] = args[i];
+                    a[i] = args[i];                                     
                 }
             }
 
@@ -274,9 +274,9 @@ namespace UnityAndroidNative.Private {
         public static string GetItemSignature(object obj) {
             var o = obj as Java.Lang.Object;
             if (o != null) {
-//                using (var clsObject = o.Call<Class>("getClass"))
-                    return "L" + o.GetClass().GetName() + ";";
+                return "L" + o.GetClass().GetName() + ";";
             }
+
             return AndroidJNIHelper.GetSignature(obj);
         }
 

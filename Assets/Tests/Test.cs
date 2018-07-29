@@ -1,19 +1,40 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+#if UNITY_ANDROID
+using UnityAndroidNative.Android.App;
 using UnityAndroidNative.Android.Content;
 using UnityAndroidNative.Android.Content.Pm;
 using UnityAndroidNative.Android.Os;
+using UnityAndroidNative.Android.Widget;
 using UnityAndroidNative.Private;
+#endif
 using UnityEngine;
 
 public class Test : MonoBehaviour {
 
     private void Start() {
-        Share("test", "test title");
+        //        Share("test", "test title");
+        ShowDialog("Hello there", "click me");
     }
 
     private void Update() {
 
+    }
+
+    public static void ShowDialog(string title, string msg) {
+#if UNITY_ANDROID
+        var activity = Internal.GetCurrentActivity();
+        AlertDialog alertDialog = new AlertDialog.Builder(activity).Create();
+        alertDialog.SetTitle(title);
+        alertDialog.SetMessage(msg);
+        alertDialog.SetButton(Dialog.BUTTON_NEGATIVE, "No", new DialogOnClickListener(which => {
+            Debug.LogWarning("btn clicked: " + which);
+        }));
+        alertDialog.SetButton(Dialog.BUTTON_POSITIVE, "Yes", new DialogOnClickListener(which => {
+            Debug.LogWarning("btn clicked: " + which);
+        }));
+        alertDialog.Show();
+#endif
     }
 
     public static void Share(string body, string subject, string mimeType = "text/plain", string chooserTitle = "Choose application") {
