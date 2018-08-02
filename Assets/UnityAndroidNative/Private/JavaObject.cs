@@ -315,7 +315,7 @@ namespace UnityAndroidNative.Private {
         protected static IntPtr JavaLangClass {
             get {
                 if (Internal.mJavaLangClass == IntPtr.Zero)
-                    Internal.mJavaLangClass = AndroidJNI.FindClass("java/lang/Class");
+                    Internal.mJavaLangClass = CreateGlobalRef(AndroidJNI.FindClass("java/lang/Class"));
 
                 return Internal.mJavaLangClass;
             }
